@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Todo App</title>
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style/style.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Anton|Oswald|Pacifico|Permanent+Marker|Poiret+One&display=swap"
+    rel="stylesheet">
+  <meta name="google-signin-client_id"
+    content="284811322674-47mfvv1p6bicin65kbb7dnggdtq02b9a.apps.googleusercontent.com">
+</head>
+
+<body>
+  <nav class="d-flex justify-content-between align-items-center pl-3">
+    <div class="d-flex align-items-center">
+      <img id="logo" src="./assets/85be6054-ce3e-4698-b655-f3e5caffd7c6_200x200.png" alt="logo">
+
+
+    </div>
+    <ul class="navbar-nav mr-auto">
+      <li class="d-flex nav-item activ">
+        <!-- <a class="hasToken nav-link" href="#">TODO</a>
+        <a class="hasToken nav-link" href="#">CREATE TODO</a>
+        <a class="hasToken nav-link" href="#">PROJECT</a>
+      </li> -->
+    </ul>
+
+    <div class="d-flex">
+      <a class="noToken nav-link" data-toggle="modal" data-target="#register-modal">REGISTER</a>
+      <a class="noToken nav-link" data-toggle="modal" data-target="#login-modal">LOGIN</a>
+      <a id="logout-button" class="hasToken nav-link">LOGOUT</a>
+    </div>
+  </nav>
+
+  <div class="jumbotron noToken">
+    <h1 class="display-4">Welcome to Itodo</h1>
+    <p class="lead">Itodo is an app that helps you manage your todo list so you won't forget every single thing that's
+      important to you.</p>
+    <hr class="my-4">
+    <p>To use this app, you need to login first.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login-modal" role="button"
+        style="color:white">Login</a>
+    </p>
+  </div>
+
+  <!-- Modal Register -->
+  <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <h4 class="modal-title" id="exampleModalLongTitle">Register</h4> -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="d-flex justify-content-center">
+              <form id="registerForm" class="form d-flex flex-column">
+                <h4>Register</h4>
+                <input class="login-register" id="reg-name" type="text" placeholder="Input your name">
+                <input class="login-register" id="reg-email" type="text" placeholder="Input your email">
+                <input class="login-register" id="reg-password" type="password" placeholder="Input your password">
+                <button type="submit" class="modal-button btn btn-primary">Submit</button>
+              </form>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+              <div class="d-flex flex-column justify-content-center">
+                <form class="form d-flex flex-column">
+                  <h4>Or</h4>
+                  <h4>Register with google</h4>
+                  <div class="click modal-button g-signin2" data-onsuccess="onSignIn"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Login -->
+  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <h4 class="modal-title" id="exampleModalLongTitle">Register</h4> -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="d-flex justify-content-center">
+              <form id="loginForm" class="form d-flex flex-column">
+                <h4>Login</h4>
+                <input class="login-register" id="login-email" type="text" placeholder="Input your email">
+                <input class="login-register" id="login-password" type="password" placeholder="Input your password">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+              <div class="d-flex flex-column justify-content-center">
+                <form class="form d-flex flex-column">
+                  <h4>Or</h4>
+                  <h4>Login with google</h4>
+                  <div class="click modal-button g-signin2" data-onsuccess="onSignIn"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hasToken">
+    <div class="row">
+      <!-- sidenav -->
+      <div class="col-sm-3">
+        <div id="sideNav">
+          <div class="card d-flex">
+            <img id="user-image" class="card-img-top img-fluid" src="./assets/user1.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 id="user-name" class="card-title">Hi User</h5>
+              <q class="card-text">The only thing more important than your to-do list is your to-be list. The only thing
+                more important than your to-be list is to be.
+              </q>
+            </div>
+            <hr>
+            <div class="card-body">
+              <h4 class="card-title" style="text-align:left">Current Weather</h4>
+              <div id="weather"></div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li id="myTodo" class="side-nav list-group-item">My Todo List</li>
+              <li id="createTodo" class="side-nav list-group-item">Create Todo</li>
+              <li id="myProject" class="side-nav list-group-item">Project Collaboration</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- content -->
+      <div class="col-sm-8 m-3">
+        <!-- form create todo -->
+        <div class="form-create-todo">
+          <form class="create-todo">
+            <h1 class="mb-3">Create Your Todo</h1>
+            <div class="form-group">
+              <label for="formCreate-name">Title</label>
+              <input id="input-form-name" type="text" class="form-control" id="formCreate-name"
+                placeholder="put your todo title">
+            </div>
+            <div class="form-group">
+              <label for="formCreate-description">Description</label>
+              <textarea id="input-form-description" class="form-control" id="formCreate-description" rows="3"
+                placeholder="put your todo description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="formCreate-dueDate">Due Date</label>
+              <input id="input-form-dueDate" type="date" class="form-control" id="formCreate-dueDate">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <!-- list my todo -->
+        <div class="my-todo ">
+          <h1>My Todo List</h1>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Due Date</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody id="listTodo"></tbody>
+          </table>
+        </div>
+
+        <!-- project menu -->
+        <div class="project-menu">
+          <!-- create project -->
+          <div class="notTodoProject" class="form-create-Project">
+            <form class="create-project">
+              <h1 class="mb-3">Create Project</h1>
+              <div class="form-group">
+                <label for="project-name">Title</label>
+                <input id="input-project-title" type="text" class="form-control" placeholder="put your project title">
+              </div>
+              <div class="form-group">
+                <label for="project-description">Description</label>
+                <textarea id="input-project-description" class="form-control" rows="3"
+                  placeholder="put your project description"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="project-dueDate">Invite Other people</label>
+                <select class="form-control listUsers" id="inputMember">
+                  <!-- <option value="invite other user" selected disabled hidden></option> -->
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+
+          <!-- edit todo in project -->
+          <div>
+            <form class="edit-todo">
+              <h1 class="mb-3">Edit Todo Project</h1>
+              <div class="form-group">
+                <label for="formCreate-name">Title</label>
+                <input id="edit-todo-name" type="text" class="form-control" id="formCreate-name"
+                  placeholder="put your todo title">
+              </div>
+              <div class="form-group">
+                <label for="formCreate-description">Description</label>
+                <textarea id="edit-todo-description" class="form-control" id="formCreate-description" rows="3"
+                  placeholder="put your todo description"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="formCreate-dueDate">Due Date</label>
+                <input id="edit-todo-dueDate" type="date" class="form-control" id="formCreate-dueDate">
+              </div>
+              <button type="submit" class="getIdTodo btn btn-primary">Submit</button>
+            </form>
+          </div>
+
+          <!-- list project -->
+          <div class="notTodoProject" class="mt-5">
+            <h1>Your Project</h1>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Person involved</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody id="list-project">
+                <tr>
+                  <th scope="row" class="icon"> &#9744 </th>
+                  <td> Project Name</td>
+                  <td> Project Description</td>
+                  <td> [Person involved]</td>
+                  <td class="icon"> <a onclick="editTodo('${data[i]._id}')">&#10000</a> </td>
+                  <td class="icon"> <a onclick="deleteTodo('${data[i]._id}')">&#128465</a> </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- list todo in project -->
+          <div id="todoProject">
+
+
+            <div class="mt-3">
+              <form class="project-todo">
+                <h1 id="idProject" class="changeId mb-3">Project Details</h1>
+                <h5 class="icon" data-toggle="modal" data-target="#add-user" style="color:blue"> Invite Other User </h5>
+                <h5>Create Todo</h5>
+                <div class="form-group">
+                  <label for="formCreate-name">Title</label>
+                  <input id="todo-project-name" type="text" class="form-control" id="formCreate-name"
+                    placeholder="put your todo title">
+                </div>
+                <div class="form-group">
+                  <label for="formCreate-description">Description</label>
+                  <textarea id="todo-project-description" class="form-control" id="formCreate-description" rows="3"
+                    placeholder="put your todo description"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="formCreate-dueDate">Due Date</label>
+                  <input id="todo-project-dueDate" type="date" class="form-control" id="formCreate-dueDate">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+              <table class="table mt-3">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+
+                  </tr>
+                </thead>
+                <tbody id="todoInProject">
+                  <tr>
+                    <th scope="row" class="icon"> &#9744 </th>
+                    <td> Project Name</td>
+                    <td> Project Description</td>
+                    <td> Due Date </td>
+                    <td class="icon"> <a onclick="editTodo('${data[i]._id}')">&#10000</a> </td>
+                    <td class="icon"> <a onclick="deleteTodo('${data[i]._id}')">&#128465</a> </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- modal add user to project -->
+      <div class="modal fade" id="add-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h4 class="modal-title" id="exampleModalLongTitle">Register</h4> -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="addUser">
+                <h1 class="mb-3">Invite Other User</h1>
+                <div class="form-group">
+                  <label for="project-dueDate">Invite Other people</label>
+                  <select class="form-control listUsers" id="inputUser">
+                    <!-- <option value="invite other user" selected disabled hidden></option> -->
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <!-- google signin -->
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  <!-- axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- swal -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>

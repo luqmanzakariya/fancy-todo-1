@@ -1,0 +1,5 @@
+NODE_ENV=development
+PORT=3000
+JWT_SECRET=terserah
+GOOGLE_CLIENT_ID=284811322674-47mfvv1p6bicin65kbb7dnggdtq02b9a.apps.googleusercontent.com
+PASSWORD_DEFAULT=terserah
