@@ -1,4 +1,5 @@
-const baseUrl = 'http://localhost:3000'
+// const baseUrl = 'http://localhost:3000'
+const baseUrl = 'http://35.247.171.62'
 let profileImage = localStorage.getItem('image') || "./assets/user1.png"
 let name = localStorage.getItem('name') || "User"
 
